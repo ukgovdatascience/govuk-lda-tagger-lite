@@ -2,14 +2,6 @@
 
 This project contains several experiments that used the [LDA](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation) machine learning algorithm to generate topics from pages on [GOV.UK](https://www.gov.uk) and tag them with those topics.
 
-## Results
-
-The output of each experiment is in the `experiments` directory.
-
-[You can open any of the ipython notebooks in nbviewer](https://nbviewer.jupyter.org/github/alphagov/govuk-lda-tagger/tree/master/experiments/).
-
-Example results: [Education theme - all audits - all data excluding PDF](https://nbviewer.jupyter.org/github/alphagov/govuk-lda-tagger/blob/master/experiments/20_topics_without_pdf_data_tfidf/tfidf.ipynb#topic=0&lambda=0.21&term=)
-
 ## Nomenclature
 
 - **Document**: a chunk of text representing a page on GOV.UK.
