@@ -14,7 +14,7 @@ subparsers = parser.add_subparsers(help='sub-commands')
 import_parser = subparsers.add_parser('import', help='Import a new dataset')
 import_parser.set_defaults(command='import')
 
-refine_parser = subparsers.add_parser('refine', help='Retrain an existing experiment')
+refine_parser = subparsers.add_parser('refine', help='Retrain an existing :experiment')
 refine_parser.set_defaults(command='refine')
 
 import_parser.add_argument(
@@ -100,7 +100,7 @@ if __name__ == '__main__':
     if experiment_name is None:
         experiment_name = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S_%f')
 
-    experiment_path = os.path.join('experiments', experiment_name)
+    experiment_path = os.path.join('output/experiments', experiment_name)
 
     if args.command == 'import':
         os.makedirs(experiment_path)
