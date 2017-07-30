@@ -38,16 +38,16 @@ def load_stopwords():
     for filename in glob.glob('stopwords/*.txt'):
         with open(filename) as fileobj:
             for line in fileobj:
-                line = preprocess_unicode(line.decode('utf8').strip())
+                line = preprocess_unicode(line.strip())
                 line = preprocess.remove_punct(line)
                 if line:
                     stopwords.append(line)
 
-    return stopwords + [word.decode('utf8') for word in STOPWORDS]
+    return stopwords + [word for word in STOPWORDS]
 
 
 STOPWORDS_UNICODE = load_stopwords()
-STOPWORDS_BYTES = [word.encode('utf8') for word in STOPWORDS_UNICODE]
+STOPWORDS_BYTES = [word for word in STOPWORDS_UNICODE]
 
 
 class CorpusReader(object):
@@ -126,7 +126,7 @@ class CorpusReader(object):
         phrases = []
         for index, document in enumerate(documents):
             print("[{}] processing {}".format(str(index), document['base_path']))
-            raw_text = preprocess_unicode(document['text'].decode('utf8'))
+            raw_text = preprocess_unicode(document['text'])
 
             phrases.append(self.document_phrases(raw_text))
 
