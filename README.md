@@ -20,6 +20,8 @@ The best way to run these scripts is by using the [govuk-lda-tagger-image](https
 
 ## Try it out
 
+Before execution, the `EXPERIMENT_DIR` environment variable needs to be set to the folder in which you want your experiments to be saved. When using within a docker container, this should default to `/mnt/experiments` to allow the experiments to be mounted as a volume.
+
 The `train_lda.py` script is a command line interface (CLI) to the LDA tagger. You can customise the input dataset, the preprocessing, and the parameters passed to the underlying LDA library.
 
 ### Generating topics and tags for early years

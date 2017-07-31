@@ -89,7 +89,7 @@ class Experiment(object):
     """
     Each experiment contains a corpus of words and an LDA model of it
     """
-    DEFAULT_EXPERIMENT_PATH = os.path.join('experiments')
+    DEFAULT_EXPERIMENT_PATH = os.path.join(os.getenv('EXPERIMENT_DIR'))
 
     def __init__(self, model, corpus, dictionary, document_metadata):
         self.ldamodel = model                       # Trained LDA model
