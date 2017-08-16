@@ -78,7 +78,7 @@ parser.add_argument(
             set to 1 in concert with --chunksize."
 )
 parser.add_argument(
-    '--chunksize', dest='chunksize', type=int, default=200,
+    '--chunksize', dest='chunksize', type=int, default=2000,
     help="Set chunksize for running online LDA. i.e.\
             number of documents before an update. See: \
             http://radimrehurek.com/gensim/wiki.html#latent-dirichlet-allocation"
