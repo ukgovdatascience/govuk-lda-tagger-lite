@@ -26,7 +26,7 @@ class S3MultiPartUploader(object):
 
         self.file_name = file_name
         self.access_key = settings['AWS_ACCESS_KEY_ID']
-        self.secret_key = settings['AWS_SECRET_ACCESS_KEY']
+        self.secret_key = settings['AWS_SECRET_ACCESS_KEY_ID']
         self.bucketname = settings['S3_BUCKET_NAME']
         self.connect_s3 = boto.connect_s3
         self.chunk_size = settings['MULTIPART_CHUNK_SIZE']
@@ -34,13 +34,14 @@ class S3MultiPartUploader(object):
 
     def upload(self):
 
-        conn = self.connect_s3(self.access_key, self.secret_key)
+        conn = self.connect_s3(self.access_key, self.secret_key, host="s3.amazonaws.com")
         bucket = conn.get_bucket(self.bucketname, validate=False)
                 
         # First check filesize to decide on uploader to use
+        # MUTLIPART_CHUNK_SIZE is given in MB
         # Must be above 10MB to use multi part uploaded (so use 10MB threshold)
 
-        file_size = os.stat(self.file_name).st_size
+        file_size = os.stat(self.file_name).st_size / 10e5
        
         if file_size > self.chunk_size:
             
@@ -48,7 +49,7 @@ class S3MultiPartUploader(object):
         
         # Create a multipart upload request
             try:
-                mp = bucket.initiate_multipart_upload(os.path.join(self.s3_dir, self.unique_file_id))
+                mp = bucket.initiate_multipart_upload(os.path.join(self.s3_dir, self.file_name))
             except:
                 print("Could not initiate multipart upload")
             else:
@@ -92,7 +93,7 @@ class S3MultiPartUploader(object):
             print("File size %s is smaller than chunk size: %s, so uploading as single chunk", file_size, self.chunk_size)
 
             k = boto.s3.key.Key(bucket)
-            k.key = os.path.join(self.s3_dir, self.unique_file_id)
+            k.key = os.path.join(self.s3_dir, self.file_name)
             k.set_contents_from_filename(self.file_name)
             k.close()
             print("Single chunk upload complete")
