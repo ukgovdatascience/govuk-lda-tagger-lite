@@ -73,17 +73,6 @@ parser.add_argument(
     help="Number of LDA passes"
 )
 parser.add_argument(
-    '--update_every', dest='update_every', type=int, default=1,
-    help="How often to run updates. Set to 0 for batch training. For online training\
-            set to 1 in concert with --chunksize."
-)
-parser.add_argument(
-    '--chunksize', dest='chunksize', type=int, default=200,
-    help="Set chunksize for running online LDA. i.e.\
-            number of documents before an update. See: \
-            http://radimrehurek.com/gensim/wiki.html#latent-dirichlet-allocation"
-)
-parser.add_argument(
     '--vis-filename', dest='vis_filename', metavar='FILENAME', default=None,
     help="Save visualisation of the topics to a file."
 )

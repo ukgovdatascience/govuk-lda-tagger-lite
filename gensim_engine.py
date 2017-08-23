@@ -60,7 +60,7 @@ class GensimEngine(object):
         experiment = Experiment.load(name)
         return GensimEngine(experiment.corpus, experiment.dictionary, experiment.document_metadata, log=log)
 
-    def train(self, number_of_topics=20, words_per_topic=8, passes=50, update_every=1, chunksize=200):
+    def train(self, number_of_topics=20, words_per_topic=8, passes=50):
         """
         It trains the LDA algorithm against the documents set in the
         initializer. We can control the number of topics we need and how many
@@ -71,9 +71,7 @@ class GensimEngine(object):
             self.corpus,
             num_topics=number_of_topics,
             id2word=self.dictionary,
-            passes=passes,
-            update_every=update_every,
-            chunksize=chunksize
+            passes=passes
         )
 
         raw_topics = self.ldamodel.show_topics(
