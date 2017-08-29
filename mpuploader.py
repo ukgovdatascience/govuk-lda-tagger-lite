@@ -34,7 +34,7 @@ class S3MultiPartUploader(object):
 
     def upload(self):
 
-        conn = self.connect_s3(self.access_key, self.secret_key, host="s3.amazonaws.com")
+        conn = self.connect_s3(self.access_key, self.secret_key, host="s3.eu-west-2.amazonaws.com")
         bucket = conn.get_bucket(self.bucketname, validate=False)
                 
         # First check filesize to decide on uploader to use
@@ -84,6 +84,7 @@ class S3MultiPartUploader(object):
                 mp.complete_upload()
             except:
                 print("Failed to complete multi-part upload, consider checking for orphans!")
+                print(sys.exc_info[0])
             else:
                 print("Multipart upload complete")
             
